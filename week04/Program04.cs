@@ -6,8 +6,6 @@ namespace JournalApp
     {
         static void Main(string[] args)
         {
-            consoel.WriteLine("Hwllo and Welcome to the Program");
-
             Journal MyJournal = new Journal();
             MyJournal.Run();
         }
