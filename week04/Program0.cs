@@ -11,7 +11,6 @@ class Program
         Console.WriteLine("3. Load");
         Console.WriteLine("4. Save");
         Console.WriteLine("5. Quit");
-        Console.WriteLine("What would you like to do today? ");
         //you need to validate the user entered a number etc.  data scrub
         int menuOption = Convert.ToInt32(Console.ReadLine());
 
@@ -28,7 +27,7 @@ class Program
                 string entry = Console.ReadLine();
                 break;
             case 2:
-                Console.WriteLine("Display");
+            //display
                 break;
             case 3:
             // load
