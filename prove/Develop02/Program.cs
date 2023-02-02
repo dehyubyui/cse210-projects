@@ -27,7 +27,7 @@ class Program
                 string entry = Console.ReadLine();
                 break;
             case 2:
-                Console.WriteLine();
+                Console.WriteLine("Display");
                 break;
             case 3:
             // load
