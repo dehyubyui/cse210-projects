@@ -12,7 +12,7 @@ public class journalEntry
     JournalEntry entry = new JournalEntry();
     PromptGenerator prompt = new PromptGenerator();
 
-    public void MainMenu()
+    public static void MainMenu() 
     {
         Console.WriteLine("Please select one of the following choices:");
         Console.WriteLine("1. Write");
