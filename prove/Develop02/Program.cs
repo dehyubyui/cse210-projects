@@ -1,108 +1,108 @@
-using System;
+using System.IO;
 
-class Program
+public class journalEntry
 {
-    static void Main()
+public class SecondSet
+{
+    
+}
+    public bool _isWork = true;
+    public int _choice = 0;
+    
+    JournalEntry entry = new JournalEntry();
+    PromptGenerator prompt = new PromptGenerator();
+
+    public void MainMenu()
     {
-        Console.WriteLine("Welcome to your Journal");
-        Console.WriteLine("Please select an option listed below by the number listed");
+        Console.WriteLine("Please select one of the following choices:");
         Console.WriteLine("1. Write");
         Console.WriteLine("2. Display");
         Console.WriteLine("3. Load");
         Console.WriteLine("4. Save");
         Console.WriteLine("5. Quit");
-        Console.WriteLine("What would you like to do today? ");
-        //you need to validate the user entered a number etc.  data scrub
-        int menuOption = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Please choose a option.");
+    }
 
-        //consider using a switch instead of if statement
+    public void SetChoice()
+    {
+        this._choice = int.Parse(Console.ReadLine());
 
-        switch(menuOption)
+        if (this._choice == 5)
         {
-            case 1:
-                //this is menu option 1
-                //ask a random question
-                Console.WriteLine("Please write an entry");
-                string foo = askQuestion();
-                Console.WriteLine(foo);
-                string entry = Console.ReadLine();
-                break;
-            case 2:
-                Console.WriteLine("Display");
-                break;
-            case 3:
-            // load
-                break;
-            case 4:
-            //save
-                break;
-            case 5:
-            //quit
-                break;
-            default:
-                break;
+            this.Quit();
         }
-          //found an easier way to get these options selected
-            
-        if (menuOption == 1)
+        else if (this._choice == 4)
         {
-            //Change to a function
-
+            this.SaveIntoFile();
         }
-        else if (menuOption == 2)
+        else if (this._choice == 3)
         {
-
+            this.LoadFile();
         }
-        if (menuOption == 2)
+        else if (this._choice == 2)
         {
-            //change to function
-            Console.WriteLine("Display messages");
+            this.Display();
         }
-
-        if (menuOption == 3)
+        else if (this._choice == 1)
         {
-            Console.WriteLine("loading");
+            this.Write();
         }
-
-        if (menuOption == 4)
-        {
-            Console.WriteLine("Save");
-        }
-
         else
         {
-            Console.WriteLine("quiting");
-        }
-        
-        
-        //asking a random question
-        static string askQuestion()
-        {
-            Random randomGenerator = new Random();
-            int magicNumber = randomGenerator.Next(1,6);
-                string myQuestion = "";
-                switch (magicNumber)
-                {
-                    case 1:
-                    myQuestion = "Who was the most interesting person I interacted with today?";
-                    break;
-                    case 2:
-                    myQuestion = "What was the best part of my day?";
-                    break;
-                    case 3:
-                    myQuestion = "How did I see the hand of the Lord in my life today?";
-                    break;
-                    case 4:
-                    myQuestion = "What was the strongest emotion I felt today?";
-                    break;
-                    case 5:
-                    myQuestion = "If I had one thing I could do over today, what would it be?";
-                    break;
-
-
-                }
-            return myQuestion;
-            
+            Console.WriteLine("No entry for this, sorry!");
         }
     }
+
+    public void Write() // 1
+    {
+
+        prompt.DisplayPrompt();
+        entry.SetLastPrompt(prompt._lastPrompt);
+        entry.CreateEntry();
+    }
+
+    public void Display() // 2
+    {
+        if (entry._curEntry == "")
+        {
+            Console.WriteLine(" Journal is empty.");
+        }
+        else 
+        {
+            Console.WriteLine(entry._curEntry);
+        }
+    }
+
+    public void LoadFile() // 3
+    {
+        Console.WriteLine("What is the name of your file?");
+        string fileName = Console.ReadLine();
+
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+
+        foreach (string line in lines)
+        {
+            if (line != "")
+            {
+                entry.SetEntry($"{line}\n");
+            } 
+        }
+    }
+
+    public void SaveIntoFile() // 4
+    {
+        Console.WriteLine("What is the name of your file?");
+        string fileName = Console.ReadLine();
+
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            outputFile.WriteLine(entry._curEntry);
+        }
+    }
+
+    public void Quit() // 5
+    {
+        this._isWork = false;
+    }
+
 }
