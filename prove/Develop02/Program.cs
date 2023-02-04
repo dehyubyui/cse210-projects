@@ -2,10 +2,10 @@ using System.IO;
 
 public class journalEntry
 {
-public class SecondSet
-{
-    
-}
+ public class SecondSet
+ {
+
+
     public bool _isWork = true;
     public int _choice = 0;
     
@@ -20,6 +20,7 @@ public class SecondSet
         Console.WriteLine("3. Load");
         Console.WriteLine("4. Save");
         Console.WriteLine("5. Quit");
+        DateTime A = DateTime.Now;
         Console.WriteLine("Please choose a option.");
     }
 
@@ -104,5 +105,5 @@ public class SecondSet
     {
         this._isWork = false;
     }
-
+ }
 }
