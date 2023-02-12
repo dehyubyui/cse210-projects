@@ -1,109 +1,47 @@
-using System.IO;
+using System;
 
-public class journalEntry
+class Program
 {
- public class SecondSet
- {
-
-
-    public bool _isWork = true;
-    public int _choice = 0;
-    
-    JournalEntry entry = new JournalEntry();
-    PromptGenerator prompt = new PromptGenerator();
-
-    public static void MainMenu() 
+    static void Main(string[] args)
     {
-        Console.WriteLine("Please select one of the following choices:");
-        Console.WriteLine("1. Write");
-        Console.WriteLine("2. Display");
-        Console.WriteLine("3. Load");
-        Console.WriteLine("4. Save");
-        Console.WriteLine("5. Quit");
-        DateTime A = DateTime.Now;
-        Console.WriteLine("Please choose a option.");
+        Console.WriteLine("Welcome to the Journal Program!");
+        Journal journal = new Journal();
+        JournalEntry entry = new JournalEntry();
+
+        bool start = journal._isWork;
+
+        while (start)
+        {
+            journal.ShowMenu();
+            journal.SetChoice();
+
+            start = journal._isWork;
+        }
+
+        
+        /*
+        What are good candidates for classes in this program?
+        Journal (Write, Display, Load, Save) - make main work.
+        JournalEntry (prompt, respond, date) - work with entry. Storing information and saving it in a file.
+        PromptGenerator
+        What are the behaviors this class will have in order to fulfill its responsibilities?
+        Journal Class:
+            Adding an entry
+            Displaying all the entries
+            Saving to a file
+            Loading from a file
+        
+        JournalEntry:
+            prompt
+            respond 
+            date
+        
+        What attributes does this class need to fulfill its behaviors?
+        
+        Journal should have List<Entry>
+        JournalEntry should store current date, the question, the respond
+        PromptGenerator stores List<Question>
+        
+        */
     }
-
-    public void SetChoice()
-    {
-        this._choice = int.Parse(Console.ReadLine());
-
-        if (this._choice == 5)
-        {
-            this.Quit();
-        }
-        else if (this._choice == 4)
-        {
-            this.SaveIntoFile();
-        }
-        else if (this._choice == 3)
-        {
-            this.LoadFile();
-        }
-        else if (this._choice == 2)
-        {
-            this.Display();
-        }
-        else if (this._choice == 1)
-        {
-            this.Write();
-        }
-        else
-        {
-            Console.WriteLine("No entry for this, sorry!");
-        }
-    }
-
-    public void Write() // 1
-    {
-
-        prompt.DisplayPrompt();
-        entry.SetLastPrompt(prompt._lastPrompt);
-        entry.CreateEntry();
-    }
-
-    public void Display() // 2
-    {
-        if (entry._curEntry == "")
-        {
-            Console.WriteLine(" Journal is empty.");
-        }
-        else 
-        {
-            Console.WriteLine(entry._curEntry);
-        }
-    }
-
-    public void LoadFile() // 3
-    {
-        Console.WriteLine("What is the name of your file?");
-        string fileName = Console.ReadLine();
-
-        string[] lines = System.IO.File.ReadAllLines(fileName);
-
-        foreach (string line in lines)
-        {
-            if (line != "")
-            {
-                entry.SetEntry($"{line}\n");
-            } 
-        }
-    }
-
-    public void SaveIntoFile() // 4
-    {
-        Console.WriteLine("What is the name of your file?");
-        string fileName = Console.ReadLine();
-
-        using (StreamWriter outputFile = new StreamWriter(fileName))
-        {
-            outputFile.WriteLine(entry._curEntry);
-        }
-    }
-
-    public void Quit() // 5
-    {
-        this._isWork = false;
-    }
- }
 }
