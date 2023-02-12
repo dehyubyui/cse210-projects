@@ -9,7 +9,11 @@ class Program
         scripture.SetReference(jonh.ShowReference());
         scripture.StartMemorize();
 
-         
+          
+          Reference proverb = new Reference("Proverbs", 3, 5, 6);
+          Scripture scripture2 = new Scripture("Trust in the Lord with all thine heart; and lean not unto thine own understanding; In all thy ways acknowledge him, and he shall direct thy paths.");
+          scripture2.SetReference(proverb.ShowReference());
+          scripture2.StartMemorize();
 
         /*
     
